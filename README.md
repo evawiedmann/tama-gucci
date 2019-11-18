@@ -2,7 +2,7 @@
 
 #### _Web application {INFORMATION}, {DATE} 2019_
 
-#### By _**Liam Kenna**_
+#### By _**Liam Kenna and Eva Wiedmann**_
 
 ## Description
 
