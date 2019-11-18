@@ -1,3 +1,4 @@
+import { Game } from './../src/js/game.js';
 import { Pet } from './../src/js/pet.js';
 
 describe('Pet constructor', () => {
@@ -60,29 +61,11 @@ describe('Pet methods', () => {
     expect(pet.hunger).toEqual(60);
   });
 
-  test('should change form when age plus level reaches 33 or 66', () => {
-    pet.age = 34;
-    pet.formChangeCheck();
-    expect(pet.form).toEqual("mid");
-  });
-
-  test('should set alive to false if health is less than one', () => {
-    pet.health = 0;
-    pet.isAlive();
-    expect(pet.alive).toEqual(false);
-  });
-
-  test('should set sick to true if poop is greater than five', () => {
-    pet.poop = 8;
-    pet.isSick();
-    expect(pet.sick).toEqual(true);
-  });
-
-  test('should set sick to true if wellness is less than 10', () => {
-    pet.wellness = 7;
-    pet.isSick();
-    expect(pet.sick).toEqual(true);
-  });
+  // test('should add one to poop count 120 seconds after feed', () => {
+  //   pet.feed();
+  //   // expect(pet.poop).toEqual(0);
+  //   setTimeout(() => expect(pet.poop).toEqual(1), 13000);
+  // });
 
   test('exercise should effect health, happiness, wellness, hunger, and hygiene', () => {
     pet.health = 75;
@@ -106,5 +89,63 @@ describe('Pet methods', () => {
     pet.snuggle();
     expect(pet.happiness).toEqual(51);
   });
+
+});
+
+describe('Game constructor', () => {
+  let pet;
+  let game;
+
+  beforeEach(() => {
+    pet = new Pet('flamingo');
+    game = new Game();
+  });
+
+  test('should create a new game with an array of possible pet types', () => {
+    expect(game.petTypes[0]).toEqual('dog');
+  });
+
+});
+
+describe('Game methods', () => {
+
+  let game;
+
+  beforeEach(() => {
+    game = new Game();
+    game.choosePet(2);
+  });
+
+  test('should change form when age plus level reaches 33 or 66', () => {
+    game.pet.age = 34;
+    game.formChangeCheck();
+    expect(game.pet.form).toEqual("mid");
+  });
+
+  test('should set alive to false if health is less than one', () => {
+    game.pet.health = 0;
+    game.isAlive();
+    expect(game.pet.alive).toEqual(false);
+  });
+
+  test('should set sick to true if poop is greater than five', () => {
+    game.pet.poop = 8;
+    game.isSick();
+    expect(game.pet.sick).toEqual(true);
+  });
+
+  test('should set sick to true if wellness is less than 10', () => {
+    game.pet.wellness = 7;
+    game.isSick();
+    expect(game.pet.sick).toEqual(true);
+  });
+
+  test('should adjust hunger, hygiene, and age when everyMin is called', () => {
+    game.everyMin();
+    expect(game.pet.hunger).toEqual(48);
+    expect(game.pet.age).toEqual(1);
+    expect(game.pet.hygiene).toEqual(49);
+  });
+
 
 });

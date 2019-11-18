@@ -16,45 +16,43 @@ export class Pet {
   }
 
   scoop() {
-    this.poop--;
+    this.modify('poop', -1);
   }
 
   feed() {
-    this.hunger += 10;
-  }
-
-  formChangeCheck() {
-    if (this.age + this.level >= 66) {
-      this.form = "old";
-    } else if (this.age + this.level >= 33) {
-      this.form = "mid";
-    }
-  }
-
-  isAlive() {
-    if (this.health < 1) this.alive = false;
-  }
-
-  isSick() {
-    if(this.poop > 7 || this.wellness < 10) this.sick = true;
+    this.modify('hunger', 10);
+    setTimeout(() => {
+      this.modify('poop',1);
+      console.log('POOP!');
+    },120000);
   }
 
   exercise() {
-    this.health++;
-    this.happiness += 5;
-    this.wellness += 10;
-    this.hunger -= 5;
-    this.hygiene -= 5;
+    this.modify('health', 1);
+    this.modify('happiness', 5);
+    this.modify('wellness', 10);
+    this.modify('hunger', -5);
+    this.modify('hygiene', -5);
   }
 
   vet() {
-    this.health += 5;
-    this.happiness -= 10;
-    this.wellness += 15;
+    this.modify('health', 5);
+    this.modify('happiness', -10);
+    this.modify('wellness', 15);
   }
 
   snuggle() {
-    this.happiness++;
+    this.modify('happiness', 1);
+  }
+
+  modify(what, amount) {
+    if ((this[what] + amount) > 100) {
+      this[what] = 100;
+    } else if ((this[what] + amount) < 1) {
+      this[what] = 0;
+    } else {
+      this[what] += amount;
+    }
   }
 
 }
