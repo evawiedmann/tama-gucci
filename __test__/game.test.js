@@ -141,7 +141,7 @@ describe('Game methods', () => {
   });
 
   test('should adjust hunger, hygiene, and age when everyMin is called', () => {
-    game.everyMin();
+    game.minuteTasks();
     expect(game.pet.hunger).toEqual(48);
     expect(game.pet.age).toEqual(1);
     expect(game.pet.hygiene).toEqual(49);

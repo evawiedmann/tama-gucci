@@ -21,6 +21,7 @@ export class Pet {
 
   feed() {
     this.modify('hunger', 10);
+    this.modify('happiness', 5);
     setTimeout(() => {
       this.modify('poop',1);
       console.log('POOP!');

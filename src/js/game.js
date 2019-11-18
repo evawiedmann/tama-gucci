@@ -7,7 +7,6 @@ export class Game {
 
   choosePet(index) {
     this.pet = new Pet(this.petTypes[index]);
-    this.everyMin();
   }
 
   formChangeCheck() {
@@ -23,18 +22,30 @@ export class Game {
   }
 
   isSick() {
-    if(this.pet.poop > 7 || this.pet.wellness < 10) this.pet.sick = true;
+    if(this.pet.poop > 7 ||
+      this.pet.wellness < 10 ||
+      this.pet.hunger < 10 ||
+      this.pet.happiness < 5
+    ) this.pet.sick = true;
   }
 
-  everyMin() {
-    while (this.pet.alive) {
-      setInterval(() => {
-        console.log('min!');
-        this.pet.modify('hunger', -2);
-        this.pet.modify('hygiene', -1);
-        this.pet.modify('age', 1);
-      },60000);
+  minuteTasks() {
+    if (this.pet.alive) {
+      this.pet.modify('hunger', -2);
+      this.pet.modify('hygiene', -1);
+      this.pet.modify('age', 1);
+      this.isSick();
+      if (this.pet.sick) {
+        this.pet.modify('health', 5);
+        this.pet.modify('hygiene', -2);
+        this.pet.modify('happiness', -10);
+      }
+      this.isAlive();
     }
+  }
+
+  startGame() {
+    setInterval(this.minuteTasks(),60000);
   }
 
 
