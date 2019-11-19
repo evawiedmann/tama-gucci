@@ -30,13 +30,14 @@ export class Game {
   }
 
   minuteTasks() {
+    console.log('run');
     if (this.pet.alive) {
       this.pet.modify('hunger', -2);
       this.pet.modify('hygiene', -1);
       this.pet.modify('age', 1);
       this.isSick();
       if (this.pet.sick) {
-        this.pet.modify('health', 5);
+        this.pet.modify('health', -5);
         this.pet.modify('hygiene', -2);
         this.pet.modify('happiness', -10);
       }
@@ -45,7 +46,7 @@ export class Game {
   }
 
   startGame() {
-    setInterval(this.minuteTasks(),60000);
+    setInterval(this.minuteTasks(),600);
   }
 
 

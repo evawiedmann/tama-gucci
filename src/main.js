@@ -24,11 +24,21 @@ import { Game } from './js/game.js';
 $(document).ready(function(){
 
 
+  const runGame = () => {
+    game.startGame();
+    setInterval(() => {
+      $('#age').css("width",`${game.pet.age}%`);
+      console.log(game.pet.age);
+    },1000);
+  };
 
   let game = new Game();
+  // game.startGame();
 
   $('#pet').click(() => {
+    console.log();
     game.choosePet(2);
+    runGame();
     console.log(game.pet.petType);
   });
 
@@ -38,6 +48,8 @@ $(document).ready(function(){
     game.pet.feed();
     console.log(game.pet);
   });
+
+
   // $('.sun').append(`<img id="Sun" class"sun" src="${sun}" alt="sun">`);
 
 });

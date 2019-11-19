@@ -61,11 +61,10 @@ describe('Pet methods', () => {
     expect(pet.hunger).toEqual(60);
   });
 
-  // test('should add one to poop count 120 seconds after feed', () => {
-  //   pet.feed();
-  //   // expect(pet.poop).toEqual(0);
-  //   setTimeout(() => expect(pet.poop).toEqual(1), 13000);
-  // });
+  test('should add one to poop count', () => {
+    pet.makePoo();
+    expect(pet.poop).toEqual(1);
+  });
 
   test('exercise should effect health, happiness, wellness, hunger, and hygiene', () => {
     pet.health = 75;
@@ -88,6 +87,12 @@ describe('Pet methods', () => {
   test('snuggle should effect happiness', () => {
     pet.snuggle();
     expect(pet.happiness).toEqual(51);
+  });
+
+  test('bathe should effect hygiene and happiness', () => {
+    pet.bathe();
+    expect(pet.hygiene).toEqual(80);
+    expect(pet.happiness).toEqual(40);
   });
 
 });
@@ -146,6 +151,5 @@ describe('Game methods', () => {
     expect(game.pet.age).toEqual(1);
     expect(game.pet.hygiene).toEqual(49);
   });
-
 
 });

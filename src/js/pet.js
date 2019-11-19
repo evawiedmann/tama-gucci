@@ -23,9 +23,12 @@ export class Pet {
     this.modify('hunger', 10);
     this.modify('happiness', 5);
     setTimeout(() => {
-      this.modify('poop',1);
-      console.log('POOP!');
+      this.makePoo();
     },120000);
+  }
+
+  makePoo() {
+    this.modify('poop', 1);
   }
 
   exercise() {
@@ -45,6 +48,13 @@ export class Pet {
   snuggle() {
     this.modify('happiness', 1);
   }
+
+  bathe() {
+    this.modify('happiness', -10);
+    this.modify('hygiene', 30);
+    setTimeout(() => this.modify('happiness', 12),30000);
+  }
+
 
   modify(what, amount) {
     if ((this[what] + amount) > 100) {
