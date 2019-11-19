@@ -10,6 +10,40 @@ import { Game } from './js/game.js';
 import poopImg from './img/poop.png';
 import blankImg from './img/blank.png';
 
+import dogImg from './img/dog.gif';
+import dogRunImg from './img/dogRun.gif';
+import dogEatImg from './img/dogEat.gif';
+import dogBathImg from './img/dogBath.gif';
+import dogVetImg from './img/dogVet.gif';
+
+
+import catImg from './img/cat.gif';
+import catRunImg from './img/catRun.gif';
+import catEatImg from './img/catEat.gif';
+import catBathImg from './img/catBath.gif';
+import catVetImg from './img/catVet.gif';
+
+const imgObj =  {
+  dog: {
+    main: dogImg,
+    exercise: dogRunImg,
+    feed: dogEatImg,
+    bathe: dogBathImg,
+    vet: dogVetImg,
+    snuggle: dogImg,
+    scoop: dogImg
+  },
+  cat: {
+    main: catImg,
+    exercise: catRunImg,
+    feed: catEatImg,
+    bathe: catBathImg,
+    vet: catVetImg,
+    snuggle: catImg,
+    scoop: catImg
+  }
+};
+
 // AUDIO
 // import sunMp3 from './mp3/sun.mp3';
 // const sunSound = new Audio();
@@ -72,6 +106,7 @@ $(document).ready(function(){
   let game = new Game();
   const petRadios = makeAnimalRadio(game);
   $('#animal-choice').prepend(petRadios);
+  let images;
 
   // let animalGif;
 
@@ -80,9 +115,8 @@ $(document).ready(function(){
     event.preventDefault();
     const chosenPet = $('input:checked').val();
     game.choosePet(chosenPet);
-    const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=joWaBUr5EiGG9HOCDxU3dhzaZiy7Hmmd&q=${chosenPet}&limit=1&offset=0&rating=G&lang=en`);
-    const myJson = await response.json();
-    const imgHtml = `<img src=${JSON.stringify(myJson.data[0].embed_url)} alt="${chosenPet}">`;
+    images = imgObj[chosenPet];
+    const imgHtml = `<img src="${images.main}" alt="${chosenPet}">`;
     console.log(imgHtml);
     $('.animal').append(imgHtml);
     runGame();
@@ -93,6 +127,9 @@ $(document).ready(function(){
   $('.buttons').on('click', 'button', (event) => {
     const buttonId = event.target.id;
     game.pet[buttonId]();
+    const imgHtml = `<img src="${images[buttonId]}" alt="${buttonId}">`;
+    $('.animal').text('');
+    $('.animal').append(imgHtml);
   });
 
 });

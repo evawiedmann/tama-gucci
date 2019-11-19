@@ -2,7 +2,7 @@ import { Pet } from './pet.js';
 
 export class Game {
   constructor() {
-    this.petTypes = ['dog','cat','flamingo','pig'];
+    this.petTypes = ['dog','cat'];
   }
 
   choosePet(petType) {
