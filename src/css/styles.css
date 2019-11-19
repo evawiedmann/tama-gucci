@@ -1,0 +1,17 @@
+.stats-grid, .poopGrid {
+  display: grid;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.stats-grid {
+  grid-template-columns: 110px 8fr;
+}
+
+.poopGrid {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.poopGrid img {
+  width: 100%;
+}

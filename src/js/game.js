@@ -2,11 +2,11 @@ import { Pet } from './pet.js';
 
 export class Game {
   constructor() {
-    this.petTypes = ['dog','cat','flamingo'];
+    this.petTypes = ['dog','cat','flamingo','pig'];
   }
 
-  choosePet(index) {
-    this.pet = new Pet(this.petTypes[index]);
+  choosePet(petType) {
+    this.pet = new Pet(petType);
   }
 
   formChangeCheck() {
@@ -30,7 +30,6 @@ export class Game {
   }
 
   minuteTasks() {
-    console.log('run');
     if (this.pet.alive) {
       this.pet.modify('hunger', -2);
       this.pet.modify('hygiene', -1);
@@ -46,7 +45,7 @@ export class Game {
   }
 
   startGame() {
-    setInterval(this.minuteTasks(),600);
+    setInterval(() => this.minuteTasks(),60000);
   }
 
 
