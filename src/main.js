@@ -15,6 +15,7 @@ import dogRunImg from './img/dogRun.gif';
 import dogEatImg from './img/dogEat.gif';
 import dogBathImg from './img/dogBath.gif';
 import dogVetImg from './img/dogVet.gif';
+import dogDeadImg from './img/dogDead.jpg';
 
 
 import catImg from './img/cat.gif';
@@ -22,6 +23,7 @@ import catRunImg from './img/catRun.gif';
 import catEatImg from './img/catEat.gif';
 import catBathImg from './img/catBath.gif';
 import catVetImg from './img/catVet.gif';
+import catDeadImg from './img/catDead.jpg';
 
 const imgObj =  {
   dog: {
@@ -31,7 +33,8 @@ const imgObj =  {
     bathe: dogBathImg,
     vet: dogVetImg,
     snuggle: dogImg,
-    scoop: dogImg
+    scoop: dogImg,
+    dead: dogDeadImg
   },
   cat: {
     main: catImg,
@@ -40,7 +43,8 @@ const imgObj =  {
     bathe: catBathImg,
     vet: catVetImg,
     snuggle: catImg,
-    scoop: catImg
+    scoop: catImg,
+    dead: catDeadImg
   }
 };
 
@@ -98,7 +102,11 @@ $(document).ready(function(){
       $('.poopGrid').text("");
       $('.poopGrid').append(pooImages);
       if (!game.pet.alive) {
+        const imgHtml = `<img src="${images.dead}" alt="dead">`;
+        $('.animal').text('');
+        $('.animal').append(imgHtml);
         $('.buttons').fadeOut();
+
       }
     },1000);
   };
@@ -117,7 +125,6 @@ $(document).ready(function(){
     game.choosePet(chosenPet);
     images = imgObj[chosenPet];
     const imgHtml = `<img src="${images.main}" alt="${chosenPet}">`;
-    console.log(imgHtml);
     $('.animal').append(imgHtml);
     runGame();
     $('.start-game').hide();
