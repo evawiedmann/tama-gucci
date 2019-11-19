@@ -18,7 +18,13 @@ export class Game {
   }
 
   isAlive() {
-    if (this.pet.health < 1) this.pet.alive = false;
+    if (this.pet.health < 1) {
+      this.pet.alive = false;
+      this.pet.hunger = 0;
+      this.pet.hygiene = 0;
+      this.pet.happiness = 0;
+      this.pet.wellness = 0;
+    }
   }
 
   isSick() {
@@ -26,7 +32,10 @@ export class Game {
       this.pet.wellness < 10 ||
       this.pet.hunger < 10 ||
       this.pet.happiness < 5
-    ) this.pet.sick = true;
+    ) {
+      this.pet.sick = true;
+      this.pet.modify('wellness' -15);
+    }
   }
 
   minuteTasks() {
@@ -36,16 +45,17 @@ export class Game {
       this.pet.modify('age', 1);
       this.isSick();
       if (this.pet.sick) {
-        this.pet.modify('health', -5);
-        this.pet.modify('hygiene', -2);
-        this.pet.modify('happiness', -10);
+        this.pet.modify('health', -10);
+        this.pet.modify('hygiene', -5);
+        this.pet.modify('happiness', -15);
+        this.pet.modify('wellness', -5);
       }
       this.isAlive();
     }
   }
 
   startGame() {
-    setInterval(() => this.minuteTasks(),60000);
+    setInterval(() => this.minuteTasks(),6000);
   }
 
 

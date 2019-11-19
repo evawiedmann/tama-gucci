@@ -24,7 +24,7 @@ export class Pet {
     this.modify('happiness', 5);
     setTimeout(() => {
       this.makePoo();
-    },120000);
+    },12000);
   }
 
   makePoo() {
@@ -43,6 +43,7 @@ export class Pet {
     this.modify('health', 5);
     this.modify('happiness', -10);
     this.modify('wellness', 15);
+    this.sick = false;
   }
 
   snuggle() {
@@ -52,7 +53,7 @@ export class Pet {
   bathe() {
     this.modify('happiness', -10);
     this.modify('hygiene', 30);
-    setTimeout(() => this.modify('happiness', 12),30000);
+    setTimeout(() => this.modify('happiness', 12),3000);
   }
 
 

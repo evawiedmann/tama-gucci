@@ -15,22 +15,21 @@ import blankImg from './img/blank.png';
 // const sunSound = new Audio();
 // sunSound.src = sunMp3;
 
-
 // TEMPLATING
 const makeAnimalRadio = (game) => {
   let result = '';
   game.petTypes.forEach(pet => {
     result += `
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="${pet}" value="${pet}">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="petRadio" id="${pet}" value="${pet}">
         <label class="form-check-label" for="exampleRadios1">
           ${pet}
         </label>
       </div>
-    `
+    `;
   });
   return result;
-}
+};
 
 const makePooImages = (poop) => {
   let result = '';
@@ -38,15 +37,15 @@ const makePooImages = (poop) => {
     if (i < poop) {
       result += `
         <img src="${poopImg}" alt="poop">
-      `
+      `;
     } else {
       result += `
         <img src="${blankImg}" alt="">
-      `
+      `;
     }
   }
   return result;
-}
+};
 
 // USER INTERFACE
 $(document).ready(function(){
@@ -64,27 +63,36 @@ $(document).ready(function(){
       const pooImages = makePooImages(game.pet.poop);
       $('.poopGrid').text("");
       $('.poopGrid').append(pooImages);
-
+      if (!game.pet.alive) {
+        $('.buttons').fadeOut();
+      }
     },1000);
   };
 
   let game = new Game();
   const petRadios = makeAnimalRadio(game);
-  $('#animal-choice').append(petRadios);
+  $('#animal-choice').prepend(petRadios);
 
-  $('#choice-form').submit(event => {
+  // let animalGif;
+
+
+  $('#animal-choice').submit(async (event) => {
     event.preventDefault();
     const chosenPet = $('input:checked').val();
     game.choosePet(chosenPet);
+    const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=joWaBUr5EiGG9HOCDxU3dhzaZiy7Hmmd&q=${chosenPet}&limit=1&offset=0&rating=G&lang=en`);
+    const myJson = await response.json();
+    const imgHtml = `<img src=${JSON.stringify(myJson.data[0].embed_url)} alt="${chosenPet}">`;
+    console.log(imgHtml);
+    $('.animal').append(imgHtml);
     runGame();
+    $('.start-game').hide();
+    $('.main').fadeIn();
   });
 
   $('.buttons').on('click', 'button', (event) => {
     const buttonId = event.target.id;
     game.pet[buttonId]();
   });
-
-
-  // $('.sun').append(`<img id="Sun" class"sun" src="${sun}" alt="sun">`);
 
 });
