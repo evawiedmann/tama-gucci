@@ -3,6 +3,7 @@ import { Pet } from './pet.js';
 export class Game {
   constructor() {
     this.petTypes = ['dog','cat'];
+    this.catFact = "";
   }
 
   choosePet(petType) {
@@ -39,6 +40,12 @@ export class Game {
   }
 
   minuteTasks() {
+    const getCatFacts = async () => {
+      const response = await fetch('https://meowfacts.herokuapp.com/');
+      const myJson = await response.json();
+      this.catFact = myJson.data[0];
+    }
+    getCatFacts();
     if (this.pet.alive) {
       this.pet.modify('hunger', -2);
       this.pet.modify('hygiene', -1);
@@ -53,6 +60,8 @@ export class Game {
       this.isAlive();
     }
   }
+
+
 
   startGame() {
     setInterval(() => this.minuteTasks(),6000);

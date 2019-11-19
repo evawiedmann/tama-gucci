@@ -2,15 +2,16 @@
   display: grid;
   max-width: 1000px;
   margin: auto;
-  padding: 20px;
 }
 
 .stats-grid {
   grid-template-columns: 110px 8fr;
+  padding: 20px;
 }
 
 .poopGrid {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 5px 10%;
 }
 
 .poopGrid img {
@@ -29,6 +30,10 @@
 
 .buttons {
   text-align: center;
+}
+
+.btn-dark {
+  margin-bottom: 10px;
 }
 
 #age {
@@ -51,4 +56,15 @@ body {
 
 .animal img {
   width: 100%;
+  margin: auto;
+}
+
+@media (max-width: 500px) {
+  .animal {
+    margin-top: 10px;
+  }
+
+  .animal img {
+    width: 70%;
+  }
 }

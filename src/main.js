@@ -90,6 +90,9 @@ $(document).ready(function(){
 
 
   const runGame = () => {
+
+
+
     game.startGame();
     setInterval(() => {
       $('#age').css("width",`${game.pet.age}%`);
@@ -98,6 +101,7 @@ $(document).ready(function(){
       $('#hygiene').css("width",`${game.pet.hygiene}%`);
       $('#happiness').css("width",`${game.pet.happiness}%`);
       $('#health').css("width",`${game.pet.health}%`);
+      $('#fact').text(game.catFact);
       const pooImages = makePooImages(game.pet.poop);
       $('.poopGrid').text("");
       $('.poopGrid').append(pooImages);
